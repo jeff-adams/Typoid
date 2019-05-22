@@ -29,8 +29,10 @@ namespace Typoid
 
         public void Run()
         {
+            Console.Clear();
+            PrintInstructions();
+            
             var words = new string[0];
-
             try
             {
                 words = CreateWordList();
@@ -89,7 +91,26 @@ namespace Typoid
             PrintGameScreen();
 
             return refresh;
-        } 
+        }
+
+        private void PrintInstructions()
+        {
+            var instructions = "To play, type the word shown in the middle of the screen as fast and accurately as you can.";
+            var prompt = "Press ENTER to begin...";
+            var instructionsXPostition = (Console.WindowWidth / 2) - ((instructions.Length - 2) / 2) + 1;
+            var promptXPostition = (Console.WindowWidth / 2) - ((prompt.Length - 2) / 2) + 1;
+            var centerScreenY = (Console.WindowHeight / 2);
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.SetCursorPosition(instructionsXPostition, centerScreenY - 1);
+            Console.Write(instructions);
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.SetCursorPosition(promptXPostition, centerScreenY + 1);
+            Console.Write(prompt);
+            Console.ResetColor();
+
+            Console.ReadKey(true);
+        }
 
         private string[] CreateWordList()
         {
