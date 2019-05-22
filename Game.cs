@@ -24,8 +24,22 @@ namespace Typoid
 
         public void Run()
         {
-            var words = CreateWordList();
+            var words = new string[0];
+
+            try
+            {
+                words = CreateWordList();
+            }
+            catch (DirectoryNotFoundException dnfe)
+            {
+                Console.WriteLine(dnfe.Message);
+                Console.ReadKey();
+                Environment.Exit(1);
+            }
+
             SetTimer();
+
+            Console.Clear();
 
             using (timer)
             {
@@ -98,7 +112,7 @@ namespace Typoid
             var wordXPosition = (Console.WindowWidth / 2 ) - ((input.Count + word.Length) / 2);
             var wordYPosition = Console.WindowHeight / 2 + 4;
             Console.SetCursorPosition(wordXPosition, wordYPosition);
-            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.ForegroundColor = ConsoleColor.Magenta;
             foreach (var letter in input)
             {
                 Console.Write(letter);
