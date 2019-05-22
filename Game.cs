@@ -13,7 +13,14 @@ namespace Typoid
         private List<char> input = new List<char>();
         private List<string> completedWords = new List<string>();
         private double elapsedTime = 0.0; 
-        private string filePath = "ext/words_alpha.txt";
+        private string filePath;
+        private Task refresh;
+
+        public Game()
+        {
+            refresh = new Task(()=>Refresh());
+            filePath = Path.Combine("ext", "words_alpha.txt");
+        }
 
         public void Run()
         {
@@ -60,7 +67,7 @@ namespace Typoid
             elapsedTime += 0.25;
             PrintGameScreen();
 
-            return new Task(()=> Refresh());
+            return refresh;
         } 
 
         private string[] CreateWordList()
