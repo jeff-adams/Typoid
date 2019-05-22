@@ -102,7 +102,7 @@ namespace Typoid
 
         private void PrintResults()
         {
-            var result = $"You typed {completedWords.Count} words in {elapsedTime.ToString("000.00")}";
+            var result = $"You typed {completedWords.Count} words in {elapsedTime.ToString("000.00")} seconds";
             var resultXPosition = (Console.WindowWidth / 2) - (result.Length / 2);
             var resultYPosition = Console.WindowHeight / 2;
 
